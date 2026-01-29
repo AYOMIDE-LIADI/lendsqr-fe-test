@@ -14,6 +14,7 @@ const Dashboard: React.FC = () => {
         setLoading(true);
 
         const data = await fetchUsers500();
+        
         const normalizedUsers: User[] = Array.isArray(data) ? data : [];
 
         setUsers(normalizedUsers);

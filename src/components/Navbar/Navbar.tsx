@@ -27,26 +27,15 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
     applyTheme(nextTheme);
   };
 
-  useEffect(() => {
-    const storedTheme = localStorage.getItem("theme") as Theme | null;
-
-    if (storedTheme) {
-      setTheme(storedTheme);
-      applyTheme(storedTheme);
-      return;
-    }
-
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const systemTheme: Theme = prefersDark ? "dark" : "light";
-    setTheme(systemTheme);
-    applyTheme(systemTheme);
-  }, []);
+useEffect(() => {
+  setTheme("light");
+  applyTheme("light");
+}, []);
 
   return (
     <header className="navbar">
       <img src={logo} alt="Logo" className="navbar__logo" />
 
-      {/* ✅ Mobile/Tablet: only logo + burger */}
       <button
         type="button"
         className="burger"
@@ -56,7 +45,6 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
         <Menu size={22} />
       </button>
 
-      {/* ✅ Desktop only */}
       <div className="arrange">
         <div className="search-container">
           <input

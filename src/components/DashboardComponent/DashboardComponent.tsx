@@ -212,6 +212,8 @@ const isEmpty = !loading && users.length === 0;
     setIsFilterOpen(false);
   };
 
+  
+
   return (
     <div className="dashboard">
       <h4>Users</h4>

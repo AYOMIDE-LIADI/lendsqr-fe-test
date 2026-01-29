@@ -59,7 +59,7 @@ const Login = () => {
     setTimeout(() => {
       setLoading(false);
       navigate("/dashboard"); 
-    }, 1000);
+    });
   };
 
   return (

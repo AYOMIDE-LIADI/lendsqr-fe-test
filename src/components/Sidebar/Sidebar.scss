@@ -8,6 +8,7 @@
   box-shadow: 4px 0 10px rgba(0, 0, 0, 0.06);
   border-right: none;
   padding-top: 20px;
+  
 
   &__switch {
     display: flex;
@@ -107,4 +108,14 @@
   }
 }
 
+@media (max-width: 1023px) {
+  .sidebar {
+    padding-bottom: 60px;
+  }
 
+  .sidebar__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

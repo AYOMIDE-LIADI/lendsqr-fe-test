@@ -124,13 +124,23 @@
   margin-top: 20px;
   border-radius: 8px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn__loader {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .error {
   font-size: 10px;
   color: rgb(240, 102, 102);
   margin-top: 5px;
-  position: absolute;
+  position: relative; 
 }
 
 .login-form {
