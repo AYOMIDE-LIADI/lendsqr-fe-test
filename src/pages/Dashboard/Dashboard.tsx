@@ -9,14 +9,14 @@ const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+
     const loadUsers = async () => {
       try {
         setLoading(true);
 
         const data = await fetchUsers500();
-        
-        const normalizedUsers: User[] = Array.isArray(data) ? data : [];
 
+        const normalizedUsers: User[] = Array.isArray(data) ? data : [];
         setUsers(normalizedUsers);
       } catch (error) {
         console.error("Failed to load users:", error);
@@ -32,7 +32,7 @@ const Dashboard: React.FC = () => {
   const usersCount = users.length;
 
   const activeUsersCount = useMemo(
-    () => users.filter((u) => u.status === "Active").length,
+    () => users.filter((u) => String(u.status) === "Active").length,
     [users]
   );
 
@@ -55,6 +55,7 @@ const Dashboard: React.FC = () => {
         activeUsersCount={activeUsersCount}
         loansCount={loansCount}
         savingsCount={savingsCount}
+        pageSize={10}
       />
     </Layout>
   );

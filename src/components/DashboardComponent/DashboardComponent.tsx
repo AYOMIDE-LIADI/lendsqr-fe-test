@@ -11,10 +11,9 @@ import eye from "../../assets/images/np_view_1214519_000000 1.svg";
 import dele from "../../assets/images/np_delete-friend_3248001_000000 1.svg";
 import activate from "../../assets/images/np_user_2995993_000000 1.svg";
 import LoadingSpinner from "../Loader/Loader";
-import type {User, UserStatus} from "../../types"
+import type { User, UserStatus } from "../../types";
 import Pagination from "../Pagination/Pagination";
 import "./DashboardComponent.scss";
-
 
 interface DashboardHeaderProps {
   users: User[];
@@ -27,14 +26,13 @@ interface DashboardHeaderProps {
   showUserDiv?: boolean;
 }
 
-
 interface UsersFilterValues {
   organization: string;
   username: string;
   email: string;
   date: string;
   phone: string;
-  status: "" | UserStatus;
+  status: "" | UserStatus | string;
 }
 
 const DashboardHeader: FC<DashboardHeaderProps> = ({
@@ -47,10 +45,10 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({
   pageSize = 10,
   showUserDiv = false,
 }) => {
-
   const navigate = useNavigate();
   const menuRef = useRef<HTMLDivElement | null>(null);
   const filterRef = useRef<HTMLDivElement | null>(null);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
 
@@ -78,8 +76,6 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({
     phone: "",
     status: "",
   });
-
-const isEmpty = !loading && users.length === 0;
 
   useEffect(() => {
     const duration = 1500;
@@ -133,22 +129,25 @@ const isEmpty = !loading && users.length === 0;
     const mail = filters.email.trim().toLowerCase();
     const phone = filters.phone.trim().toLowerCase();
     const date = filters.date.trim();
-    const status = filters.status;
+    const status = String(filters.status || "");
 
     return users.filter((u) => {
-      const matchOrg = !org || (u.organization ?? "").toLowerCase().includes(org);
-      const matchUname = !uname || (u.username ?? "").toLowerCase().includes(uname);
-      const matchMail = !mail || (u.email ?? "").toLowerCase().includes(mail);
-      const matchPhone = !phone || (u.phone ?? "").toLowerCase().includes(phone);
-      const matchStatus = !status || u.status === status;
+      const matchOrg = !org || String(u.organization ?? "").toLowerCase().includes(org);
+      const matchUname = !uname || String(u.username ?? "").toLowerCase().includes(uname);
+      const matchMail = !mail || String(u.email ?? "").toLowerCase().includes(mail);
+      const matchPhone = !phone || String(u.phone ?? "").toLowerCase().includes(phone);
+
+      const matchStatus = !status || String(u.status) === status;
 
       const matchDate =
         !date ||
         (() => {
           const apiDate = String(u.dateJoined ?? "");
           if (!apiDate) return false;
+
           const parsed = new Date(apiDate);
           if (Number.isNaN(parsed.getTime())) return apiDate.includes(date);
+
           const yyyy = parsed.getFullYear();
           const mm = String(parsed.getMonth() + 1).padStart(2, "0");
           const dd = String(parsed.getDate()).padStart(2, "0");
@@ -166,10 +165,10 @@ const isEmpty = !loading && users.length === 0;
   const totalPages = Math.max(1, Math.ceil(filteredUsers.length / pageSize));
   const startIndex = (currentPage - 1) * pageSize;
   const paginatedUsers = filteredUsers.slice(startIndex, startIndex + pageSize);
+
+  // ✅ Keep currentPage valid when filteredUsers changes
   useEffect(() => {
-  if (currentPage > totalPages) {
-    setCurrentPage(totalPages);
-  }
+    if (currentPage > totalPages) setCurrentPage(totalPages);
   }, [currentPage, totalPages]);
 
   const handleMenuAction = (action: string, user: User) => {
@@ -212,7 +211,7 @@ const isEmpty = !loading && users.length === 0;
     setIsFilterOpen(false);
   };
 
-  
+  const isEmpty = !loading && filteredUsers.length === 0;
 
   return (
     <div className="dashboard">
@@ -326,7 +325,7 @@ const isEmpty = !loading && users.length === 0;
                     <div className="users-filter__control users-filter__control--select">
                       <select
                         className="users-filter__input"
-                        value={draftFilters.status}
+                        value={String(draftFilters.status)}
                         onChange={updateDraft("status")}
                       >
                         <option value="">Select</option>
@@ -379,98 +378,88 @@ const isEmpty = !loading && users.length === 0;
             ))}
           </div>
 
-         {isEmpty ? (
-  <div className="empty-state">
-    <h4>No users available</h4>
-    <p>We couldn’t load any users right now. Please try again later.</p>
-  </div>
-) : (
-  !loading &&
-  paginatedUsers.map((user) => (
-    <div className="table-header-holder" key={user.id}>
-      <span className="header-text">{user.organization}</span>
-      <span className="header-text">{user.username}</span>
-      <span className="header-text">{user.email}</span>
-      <span className="header-text">{user.phone}</span>
-      <span className="header-text">{user.dateJoined}</span>
-
-      <div className={`status status--${user.status.toLowerCase()}`}>
-        <p className="header-text">{user.status}</p>
-      </div>
-
-      <div className="actions-wrapper">
-        <img
-          src={dot}
-          alt="menu"
-          onClick={() =>
-            setActiveMenuId(activeMenuId === String(user.id) ? null : String(user.id))
-          }
-        />
-        {activeMenuId === String(user.id) && (
-  <div className="actions-menu" ref={menuRef}>
-    <button
-      className="modal"
-      onClick={() => handleMenuAction("view", user)}
-    >
-      <img src={eye} alt="" />
-      View Details
-    </button>
-
-    <button
-      className={`modal ${
-        user.status === "Blacklisted" ? "modal--disabled" : ""
-      }`}
-      disabled={user.status === "Blacklisted"}
-      onClick={() => {
-        if (user.status !== "Blacklisted") {
-        }
-      }}
-    >
-      <img src={dele} alt="" />
-      Blacklist User
-    </button>
-
-    <button
-      className={`modal ${
-        user.status === "Active" ? "modal--disabled" : ""
-      }`}
-      disabled={user.status === "Active"}
-      onClick={() => {
-        if (user.status !== "Active") {
-        }
-      }}
-    >
-      <img src={activate} alt="" />
-      Activate User
-    </button>
-  </div>
-)}
-
-      </div>
-    </div>
-  ))
-)}
-
-
           {loading && (
             <div className="loader-wrapper">
               <LoadingSpinner />
             </div>
           )}
+
+          {isEmpty && (
+            <div className="empty-state">
+              <h4>No users available</h4>
+              <p>We couldn’t load any users right now. Please try again later.</p>
+            </div>
+          )}
+
+          {!loading &&
+            !isEmpty &&
+            paginatedUsers.map((user) => {
+              const statusText = String(user.status ?? "");
+              const statusClass = statusText.toLowerCase();
+
+              return (
+                <div className="table-header-holder" key={user.id}>
+                  <span className="header-text">{user.organization}</span>
+                  <span className="header-text">{user.username}</span>
+                  <span className="header-text">{user.email}</span>
+                  <span className="header-text">{user.phone}</span>
+                  <span className="header-text">{user.dateJoined}</span>
+
+                  <div className={`status status--${statusClass}`}>
+                    <p className="header-text">{statusText}</p>
+                  </div>
+
+                  <div className="actions-wrapper">
+                    <img
+                      src={dot}
+                      alt="menu"
+                      onClick={() =>
+                        setActiveMenuId(activeMenuId === String(user.id) ? null : String(user.id))
+                      }
+                    />
+
+                    {activeMenuId === String(user.id) && (
+                      <div className="actions-menu" ref={menuRef}>
+                        <button className="modal" onClick={() => handleMenuAction("view", user)}>
+                          <img src={eye} alt="" />
+                          View Details
+                        </button>
+
+                        <button
+                          className={`modal ${statusText === "Blacklisted" ? "modal--disabled" : ""}`}
+                          disabled={statusText === "Blacklisted"}
+                          onClick={() => {}}
+                        >
+                          <img src={dele} alt="" />
+                          Blacklist User
+                        </button>
+
+                        <button
+                          className={`modal ${statusText === "Active" ? "modal--disabled" : ""}`}
+                          disabled={statusText === "Active"}
+                          onClick={() => {}}
+                        >
+                          <img src={activate} alt="" />
+                          Activate User
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
         </div>
       </div>
 
-      {!isEmpty && (
-  <Pagination
-    currentPage={currentPage}
-    totalPages={totalPages}
-    onPageChange={setCurrentPage}
-    pageCount={paginatedUsers.length}
-    totalCount={users.length}
-  />
-)}
-
-
+      {!loading && filteredUsers.length > 0 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          pageCount={paginatedUsers.length}
+          totalCount={filteredUsers.length}
+        />
+      )}
     </div>
   );
 };
