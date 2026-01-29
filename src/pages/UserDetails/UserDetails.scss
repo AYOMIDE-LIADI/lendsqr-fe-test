@@ -1,0 +1,269 @@
+.details{
+  padding: 30px 60px;
+  color: rgba(84, 95, 125, 1);
+
+}
+.back{
+  font-size: 14px;
+}
+.back-holder{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+}
+.sub{
+  color: rgba(33, 63, 125, 1);
+  font-size: 24px;
+}
+.sub-holder{
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.control {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.control button {
+  background: transparent;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+  outline: none;
+}
+
+.control button:focus-visible {
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+}
+
+.control button:active {
+  transform: scale(0.96);
+}
+
+.blacklist {
+  color: rgba(228, 3, 59, 1);
+  border: 1px solid rgba(228, 3, 59, 1);
+}
+
+.blacklist:hover {
+  background-color: rgba(228, 3, 59, 0.08);
+}
+
+.blacklist:focus-visible {
+  box-shadow: 0 0 0 3px rgba(228, 3, 59, 0.25);
+}
+
+.activate {
+  color: rgba(57, 205, 204, 1);
+  border: 1px solid rgba(57, 205, 204, 1);
+}
+
+.activate:hover {
+  background-color: rgba(57, 205, 204, 0.1);
+}
+
+.activate:focus-visible {
+  box-shadow: 0 0 0 3px rgba(57, 205, 204,
+)}
+.control{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+.profile-holder {
+  padding-top: 30px;
+  padding-left: 20px;
+  padding-right: 0px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-top: 50px;
+}
+.profile{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+.name{
+  color: rgba(33, 63, 125, 1);
+  font-size: 22px;
+}
+.name2{
+  color: rgba(84, 95, 125, 1);
+  font-size: 14px;
+  margin-top: 7px;
+}
+.divider {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  gap: 8px; 
+  opacity: 0.8;
+  position: relative;
+  font-size: 14px;
+  color: rgba(84, 95, 125, 1);
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  &::before {
+    left: -25px; 
+  }
+
+  &::after {
+    right: -25px; 
+  }
+
+  span {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .star {
+    display: flex;
+    gap: 4px; 
+  }
+}
+
+.star{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+.cash{
+  font-size: 22px;
+  color: rgba(33, 63, 125, 1);
+}
+.bank{
+  color: rgba(33, 63, 125, 1);
+  font-size: 12px;
+  margin-top: 7px;
+}
+.tabs {
+  display: flex;
+  gap: 70px;
+  margin-top: 24px;
+}
+
+.tab-item {
+  padding:  16px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
+  font-size: 16px;
+
+  &.active {
+    color: rgba(57, 205, 204, 1);
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: rgba(57, 205, 204, 1);
+      border-radius: 2px;
+    }
+  }
+}
+@media (max-width: 1023px) {
+  .details {
+    padding: 16px;
+  }
+
+  .back-holder {
+    gap: 10px;
+  }
+
+  .sub-holder {
+    margin-top: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .control {
+    width: 100%;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .control button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .profile-holder {
+    margin-top: 24px;
+    padding: 16px;
+    padding-right: 16px;
+  }
+
+  .profile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .user-info {
+    width: 100%;
+  }
+
+  .divider {
+    width: 100%;
+    align-items: flex-start;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+
+  .account {
+    width: 100%;
+  }
+
+  .tabs {
+    gap: 12px;
+    margin-top: 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    padding-bottom: 6px;
+  }
+
+  .tab-item {
+    flex: 0 0 auto;
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+}
+

@@ -1,0 +1,138 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 135px;
+  width: 100%;
+  padding: 20px 105px 20px 30px;
+  position: fixed;
+  top: 0;
+  z-index: 30;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+
+  &__logo {
+    display: block;
+  }
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+
+  .search-input {
+    flex: 1;
+    padding: 12px 14px;
+    border: none;
+    font-size: 14px;
+    color: #333;
+
+    &::placeholder {
+      color: #b5b5b5;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .search-holder {
+    width: 48px;
+    height: 100%;
+    background-color: rgba(57, 205, 204, 1);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    cursor: pointer;
+
+    .search-icon {
+      color: #fff;
+    }
+  }
+
+  &:focus-within {
+    border-color: rgba(57, 205, 204, 1);
+  }
+}
+
+.doc {
+  color: rgba(33, 63, 125, 1);
+  text-decoration: underline;
+}
+
+.icon-holder {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}
+
+.avatar-holder {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.name-holder {
+  color: rgba(33, 63, 125, 1);
+  font-size: 16px;
+}
+
+.arrange {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+}
+
+.theme-toggle {
+  color: rgba(33, 63, 125, 1);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ✅ burger hidden on desktop */
+.burger {
+  display: none;
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: rgba(33, 63, 125, 1);
+  align-items: center;
+  justify-content: center;
+}
+
+/* ✅ Mobile + Tablet: show only logo + burger */
+@media (max-width: 1023px) {
+  .navbar {
+    padding: 16px;
+    gap: 12px;
+    justify-content: space-between;
+  }
+
+  .burger {
+    display: inline-flex;
+  }
+
+  /* hide desktop navbar content completely */
+  .arrange {
+    display: none;
+  }
+}

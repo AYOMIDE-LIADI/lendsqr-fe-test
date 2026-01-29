@@ -1,0 +1,184 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: clamp(20px, 4vw, 70px);
+  width: 100%;
+  overflow-x: hidden;
+
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: clamp(20px, 4vw, 40px);
+  }
+
+  .split {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: clamp(24px, 6vw, 190px);
+    width: 100%;
+  }
+}
+
+.split1 {
+  margin-top: clamp(12px, 4vw, 50px);
+  width: min(520px, 100%);
+  height: auto;
+  display: block;
+}
+
+.text {
+  color: rgba(84, 95, 125, 1);
+  margin-top: 20px;
+  size: 20px;
+}
+
+.kin {
+  height: 36px;
+  width: 173px;
+}
+
+.input {
+  border: 1px solid rgb(215, 214, 214);
+  color: 1px solid rgb(215, 214, 214);
+  border-radius: 0.25rem;
+  width: 400px;
+  max-width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-top: clamp(28px, 6vw, 96px);
+
+  &::placeholder {
+    color: rgb(192, 189, 189);
+    opacity: 1;
+  }
+}
+
+.input1 {
+  border: 1px solid rgb(215, 214, 214);
+  color: 1px solid rgb(240, 237, 237);
+  border-radius: 0.25rem;
+  width: 400px;
+  max-width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-top: 20px;
+
+  &::placeholder {
+    color: rgb(192, 189, 189);
+    opacity: 1;
+  }
+}
+
+.input-container {
+  position: relative;
+  width: 400px;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+
+  .input1 {
+    width: 100%;
+    padding: 10px 40px 10px 10px;
+    border-radius: 4px;
+
+    &::placeholder {
+      color: rgb(192, 189, 189);
+      opacity: 1;
+    }
+  }
+
+  .toggle {
+    position: absolute;
+    right: 10px;
+    bottom: 14px;
+    font-size: 9px;
+    cursor: pointer;
+    color: rgba(57, 205, 204, 1);
+    font-weight: bold;
+    user-select: none;
+  }
+}
+
+.forgot {
+  margin-top: 25px;
+  color: rgba(57, 205, 204, 1);
+  cursor: pointer;
+}
+
+.btn {
+  background-color: rgba(57, 205, 204, 1);
+  width: 400px;
+  max-width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: white;
+  text-align: center;
+  border: none;
+  margin-top: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.error {
+  font-size: 10px;
+  color: rgb(240, 102, 102);
+  margin-top: 5px;
+  position: absolute;
+}
+
+.login-form {
+  position: relative;
+  width: 400px;
+  max-width: 100%;
+}
+
+@media (max-width: 980px) {
+  .login {
+    .split {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 32px;
+    }
+  }
+
+  .split1 {
+    width: min(520px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .login-form {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .kin {
+    width: 150px;
+    height: auto;
+  }
+
+  .toggle {
+    bottom: 12px;
+  }
+}
+@media (min-width: 1024px) {
+  .login {
+    padding: 100px; 
+    padding-right: 90px;
+  }
+
+  .split {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+}

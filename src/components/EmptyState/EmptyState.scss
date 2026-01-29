@@ -1,0 +1,17 @@
+.empty-state {
+  padding: 60px 20px;
+  text-align: center;
+  font-family: "Work Sans", sans-serif;
+
+  &__title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #213f7d;
+    margin-bottom: 8px;
+  }
+
+  &__desc {
+    font-size: 14px;
+    color: #545f7d;
+  }
+}

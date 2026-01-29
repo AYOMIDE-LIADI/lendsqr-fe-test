@@ -1,0 +1,101 @@
+
+@use "./variables";
+@use "./mixins";
+@use "./fonts";
+
+
+:root[data-theme="light"] {
+  --bg: #fbfbfb;
+  --text: #213f7d;
+  --card-bg: #ffffff;
+  --border: #e5e7eb;
+  --navbar-bg: #ffffff;
+  --sidebar-bg: #ffffff;
+  --input-bg: #f9f9f9;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f172a;
+  --text: #8198d3;
+  --card-bg: #020617;
+  --border: #1e293b;
+  --navbar-bg: #1e293b;
+  --sidebar-bg: #111827;
+  --input-bg: #1f2937;
+}
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Work Sans", sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar,
+.sidebar,
+.card,
+input,
+textarea,
+button {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+input,
+textarea {
+  background-color: var(--input-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.navbar {
+  background-color: var(--navbar-bg);
+  color: var(--text);
+}
+
+.sidebar {
+  background-color: var(--sidebar-bg);
+  color: var(--text);
+}
+
+.border {
+  border-color: var(--border) !important;
+}
+
+:root[data-theme="light"] {
+  --bg: #fbfbfb;
+  --text: #213f7d;
+  --card-bg: #ffffff;
+  --border: #e5e7eb;
+  --navbar-bg: #ffffff;
+  --sidebar-bg: #ffffff;
+  --input-bg: #f9f9f9;
+
+  --loader-color: #3a3333; 
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f172a;
+  --text: #8198d3;
+  --card-bg: #020617;
+  --border: #1e293b;
+  --navbar-bg: #1e293b;
+  --sidebar-bg: #111827;
+  --input-bg: #1f2937;
+
+  --loader-color: #ffffff; 
+}
+
