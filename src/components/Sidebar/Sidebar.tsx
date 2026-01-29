@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { X } from "lucide-react"; // ✅ add
+import { X } from "lucide-react"; 
 
 import brief from "../../assets/images/briefcase 1.svg";
 import home from "../../assets/images/home 1.svg";
@@ -92,7 +92,7 @@ const Sidebar = ({ onLogout, onClose }: SidebarProps) => {
 
           if (item.path) {
             navigate(item.path);
-            onClose?.(); // ✅ close sidebar after navigating (mobile)
+            onClose?.(); 
           }
         }}
         style={{

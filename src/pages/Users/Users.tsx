@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import DashboardHeader from "../../components/DashboardComponent/DashboardComponent";
-import { UserStatus } from "../../types";
 import type { User } from "../../types";
 import { fetchUsers500 } from "../../api/usersApi";
 
@@ -32,7 +31,7 @@ const Users: React.FC = () => {
   const usersCount = users.length;
 
   const activeUsersCount = useMemo(
-    () => users.filter((u) => u.status === UserStatus.ACTIVE).length,
+    () => users.filter((u) => u.status === "Active").length,
     [users]
   );
 
@@ -48,15 +47,15 @@ const Users: React.FC = () => {
 
   return (
     <Layout>
-          <DashboardHeader
-            users={users}
-            loading={loading}
-            usersCount={usersCount}
-            activeUsersCount={activeUsersCount}
-            loansCount={loansCount}
-            savingsCount={savingsCount}
-            showUserDiv={true}
-          />
+      <DashboardHeader
+        users={users}
+        loading={loading}
+        usersCount={usersCount}
+        activeUsersCount={activeUsersCount}
+        loansCount={loansCount}
+        savingsCount={savingsCount}
+        showUserDiv={true}
+      />
     </Layout>
   );
 };

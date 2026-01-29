@@ -1,10 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import DashboardHeader from "../../components/DashboardComponent/DashboardComponent";
-import { UserStatus } from "../../types";
 import type { User } from "../../types";
-
-import { fetchUsers500 } from "../../api/usersApi"; 
+import { fetchUsers500 } from "../../api/usersApi";
 
 const Dashboard: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -16,7 +14,6 @@ const Dashboard: React.FC = () => {
         setLoading(true);
 
         const data = await fetchUsers500();
-
         const normalizedUsers: User[] = Array.isArray(data) ? data : [];
 
         setUsers(normalizedUsers);
@@ -34,7 +31,7 @@ const Dashboard: React.FC = () => {
   const usersCount = users.length;
 
   const activeUsersCount = useMemo(
-    () => users.filter((u) => u.status === UserStatus.ACTIVE).length,
+    () => users.filter((u) => u.status === "Active").length,
     [users]
   );
 

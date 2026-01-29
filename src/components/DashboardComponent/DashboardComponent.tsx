@@ -1,4 +1,5 @@
-import { FC, useEffect, useMemo, useRef, useState } from "react";
+import type { FC } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import icon from "../../assets/images/icon.svg";
 import icon1 from "../../assets/images/icon (1).svg";
@@ -10,36 +11,14 @@ import eye from "../../assets/images/np_view_1214519_000000 1.svg";
 import dele from "../../assets/images/np_delete-friend_3248001_000000 1.svg";
 import activate from "../../assets/images/np_user_2995993_000000 1.svg";
 import LoadingSpinner from "../Loader/Loader";
-import { fetchUsers500 } from "../../api/usersApi";
+import type {User, UserStatus} from "../../types"
 import Pagination from "../Pagination/Pagination";
 import "./DashboardComponent.scss";
 
-type UserStatus = "Active" | "Inactive" | "Pending" | "Blacklisted";
-
-interface User {
-  id: string | number;
-  organization: string;
-  first_name?: string;
-  last_name?: string;
-  username: string;
-  email: string;
-  phone: string;
-  dateJoined: string;
-  status: UserStatus;
-  accountBalance?: number;
-  accountNumber?: string;
-  bankName?: string;
-  BankName?: string;
-  gender?: string;
-  Gender?: string;
-  maritalStatus?: string;
-  MaritalStatus?: string;
-  residence?: string;
-  loansCount?:number;
-  savingsCount?:number;
-}
 
 interface DashboardHeaderProps {
+  users: User[];
+  loading: boolean;
   usersCount: number;
   activeUsersCount: number;
   loansCount: number;
@@ -47,6 +26,7 @@ interface DashboardHeaderProps {
   pageSize?: number;
   showUserDiv?: boolean;
 }
+
 
 interface UsersFilterValues {
   organization: string;
@@ -58,17 +38,19 @@ interface UsersFilterValues {
 }
 
 const DashboardHeader: FC<DashboardHeaderProps> = ({
+  users,
+  loading,
+  usersCount,
+  activeUsersCount,
   loansCount,
   savingsCount,
   pageSize = 10,
   showUserDiv = false,
 }) => {
+
   const navigate = useNavigate();
   const menuRef = useRef<HTMLDivElement | null>(null);
   const filterRef = useRef<HTMLDivElement | null>(null);
-
-  const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
 
@@ -97,29 +79,7 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({
     status: "",
   });
 
-  useEffect(() => {
-    const getUsers = async () => {
-      try {
-        const data = await fetchUsers500();
-        setUsers(Array.isArray(data) ? data : []);
-        console.log(data);
-        
-      }finally {
-        setLoading(false);
-      }
-    };
-    getUsers();
-  }, []);
-
-  const resolvedUsersCount = users.length;
-
-const resolvedActiveUsersCount = useMemo(() => {
-  return users.filter((u) => u.status?.toLowerCase() === "active").length;
-}, [users]);
-
 const isEmpty = !loading && users.length === 0;
-
-
 
   useEffect(() => {
     const duration = 1500;
@@ -129,8 +89,8 @@ const isEmpty = !loading && users.length === 0;
       if (!start) start = timestamp;
       const progress = Math.min((timestamp - start) / duration, 1);
 
-      setAnimatedUsers(Math.floor(progress * resolvedUsersCount));
-      setAnimatedActiveUsers(Math.floor(progress * resolvedActiveUsersCount));
+      setAnimatedUsers(Math.floor(progress * usersCount));
+      setAnimatedActiveUsers(Math.floor(progress * activeUsersCount));
       setAnimatedLoans(Math.floor(progress * loansCount));
       setAnimatedSavings(Math.floor(progress * savingsCount));
 
@@ -138,7 +98,7 @@ const isEmpty = !loading && users.length === 0;
     };
 
     requestAnimationFrame(step);
-  }, [resolvedUsersCount, resolvedActiveUsersCount, loansCount, savingsCount]);
+  }, [usersCount, activeUsersCount, loansCount, savingsCount]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
