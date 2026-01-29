@@ -1,4 +1,5 @@
-import { FC, useMemo } from "react";
+import type { FC } from "react";
+import { useMemo } from "react";
 import prev from "../../assets/images/prev btn.svg";
 import next from "../../assets/images/next btn.svg";
 import "./Pagination.scss";

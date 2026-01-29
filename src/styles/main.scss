@@ -1,7 +1,7 @@
 
 @use "./variables";
 @use "./mixins";
-@use "./fonts";
+@use "../../public/fonts/fonts";
 
 
 :root[data-theme="light"] {
