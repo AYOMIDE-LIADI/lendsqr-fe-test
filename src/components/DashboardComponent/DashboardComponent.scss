@@ -54,7 +54,7 @@
 .table-header-holder1,
 .table-header-holder {
   display: grid;
-  grid-template-columns: 1.2fr 1.2fr 1.2fr 1.2fr 1.2fr 1fr 40px;
+  grid-template-columns: 1fr 1.1fr 1.7fr 1.1fr 1.1fr 1fr 40px;
   align-items: center;
   gap: 8px;
   padding: 10px 0;
@@ -303,6 +303,7 @@
   top: 50px;
   left: 10px;
   border: 1px solid var(--border-color, #ccc);
+  z-index: 99999;
 }
 
 .users-filter__label {
@@ -352,7 +353,7 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  border: none;
+  border: 1px solid #ccc;;
 }
 
 .users-filter__btn--primary {
@@ -416,3 +417,4 @@
     padding: 10px 14px;
   }
 }
+
