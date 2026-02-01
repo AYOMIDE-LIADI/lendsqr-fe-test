@@ -1,7 +1,6 @@
 .details{
   padding: 30px 60px;
   color: rgba(84, 95, 125, 1);
-  padding-top: 110px;
 }
 .back{
   font-size: 14px;
@@ -193,9 +192,11 @@
     }
   }
 }
+
+
 @media (max-width: 1023px) {
   .details {
-    padding: 16px;
+    padding: 55px 16px 16px; 
   }
 
   .back-holder {
@@ -266,4 +267,6 @@
     font-size: 14px;
   }
 }
+
+
 
