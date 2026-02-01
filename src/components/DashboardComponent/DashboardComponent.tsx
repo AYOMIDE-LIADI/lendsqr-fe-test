@@ -15,7 +15,7 @@ import type { User, UserStatus } from "../../types";
 import Pagination from "../Pagination/Pagination";
 import "./DashboardComponent.scss";
 
-interface DashboardHeaderProps {
+interface DashboardComponentProps {
   users: User[];
   loading: boolean;
   usersCount: number;
@@ -35,7 +35,7 @@ interface UsersFilterValues {
   status: "" | UserStatus | string;
 }
 
-const DashboardHeader: FC<DashboardHeaderProps> = ({
+const DashboardComponent: FC<DashboardComponentProps> = ({
   users,
   loading,
   usersCount,
@@ -166,7 +166,6 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({
   const startIndex = (currentPage - 1) * pageSize;
   const paginatedUsers = filteredUsers.slice(startIndex, startIndex + pageSize);
 
-  // ✅ Keep currentPage valid when filteredUsers changes
   useEffect(() => {
     if (currentPage > totalPages) setCurrentPage(totalPages);
   }, [currentPage, totalPages]);
@@ -464,4 +463,4 @@ const DashboardHeader: FC<DashboardHeaderProps> = ({
   );
 };
 
-export default DashboardHeader;
+export default DashboardComponent;

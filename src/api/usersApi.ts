@@ -14,13 +14,11 @@ export const fetchUsers500 = async () => {
 
   const res = await fetch(url);
 
-const text = await res.text();
+  const text = await res.text();
 
 if (!res.ok) {
   return [];
 }
-
-
   if (!res.ok) {
     return [];
   }
