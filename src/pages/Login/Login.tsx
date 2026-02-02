@@ -58,8 +58,10 @@ const Login = () => {
 
     setTimeout(() => {
       setLoading(false);
+      localStorage.setItem("theme", "light");
+      document.documentElement.setAttribute("data-theme", "light");
       navigate("/dashboard"); 
-    });
+    });     
   };
 
   return (

@@ -1,6 +1,5 @@
 import "./Loader.scss";
 
-
 const LoadingSpinner = () => (
   <div className="spinner">
     <div className="bounce1" />

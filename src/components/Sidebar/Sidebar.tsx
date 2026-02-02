@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { X } from "lucide-react"; 
-
 import brief from "../../assets/images/briefcase 1.svg";
 import home from "../../assets/images/home 1.svg";
 import userp from "../../assets/images/user-friends 1.svg";

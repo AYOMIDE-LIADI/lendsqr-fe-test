@@ -14,23 +14,23 @@ type NavbarProps = {
 };
 
 const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>(() => {
+    const saved = localStorage.getItem("theme");
+    return saved === "dark" ? "dark" : "light";
+  });
 
   const applyTheme = (mode: Theme) => {
     document.documentElement.setAttribute("data-theme", mode);
     localStorage.setItem("theme", mode);
   };
 
-  const toggleTheme = () => {
-    const nextTheme: Theme = theme === "light" ? "dark" : "light";
-    setTheme(nextTheme);
-    applyTheme(nextTheme);
-  };
+  useEffect(() => {
+    applyTheme(theme);
+  }, [theme]);
 
-useEffect(() => {
-  setTheme("light");
-  applyTheme("light");
-}, []);
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
 
   return (
     <header className="navbar">
