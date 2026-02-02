@@ -13,6 +13,7 @@ import activate from "../../assets/images/np_user_2995993_000000 1.svg";
 import LoadingSpinner from "../Loader/Loader";
 import type { User, UserStatus } from "../../types";
 import Pagination from "../Pagination/Pagination";
+import Counter from "../Counter/Counter";
 import "./DashboardComponent.scss";
 
 interface DashboardComponentProps {
@@ -52,11 +53,6 @@ const DashboardComponent: FC<DashboardComponentProps> = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
 
-  const [animatedUsers, setAnimatedUsers] = useState(0);
-  const [animatedActiveUsers, setAnimatedActiveUsers] = useState(0);
-  const [animatedLoans, setAnimatedLoans] = useState(0);
-  const [animatedSavings, setAnimatedSavings] = useState(0);
-
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const [filters, setFilters] = useState<UsersFilterValues>({
@@ -76,25 +72,6 @@ const DashboardComponent: FC<DashboardComponentProps> = ({
     phone: "",
     status: "",
   });
-
-  useEffect(() => {
-    const duration = 1500;
-    let start: number | null = null;
-
-    const step = (timestamp: number) => {
-      if (!start) start = timestamp;
-      const progress = Math.min((timestamp - start) / duration, 1);
-
-      setAnimatedUsers(Math.floor(progress * usersCount));
-      setAnimatedActiveUsers(Math.floor(progress * activeUsersCount));
-      setAnimatedLoans(Math.floor(progress * loansCount));
-      setAnimatedSavings(Math.floor(progress * savingsCount));
-
-      if (progress < 1) requestAnimationFrame(step);
-    };
-
-    requestAnimationFrame(step);
-  }, [usersCount, activeUsersCount, loansCount, savingsCount]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -215,30 +192,29 @@ const DashboardComponent: FC<DashboardComponentProps> = ({
   return (
     <div className="dashboard">
       <h4>Users</h4>
-
       <div className="box-holders">
         <div className="box">
           <img src={icon} alt="" />
           <p className="text">USERS</p>
-          <h4>{animatedUsers.toLocaleString()}</h4>
+          <h4><Counter end={Number(usersCount ?? 0)} /></h4>
         </div>
 
         <div className="box">
           <img src={icon1} alt="" />
           <p className="text">ACTIVE USERS</p>
-          <h4>{animatedActiveUsers.toLocaleString()}</h4>
+          <h4><Counter end={Number(activeUsersCount ?? 0)} /></h4>
         </div>
 
         <div className="box">
           <img src={icon2} alt="" />
           <p className="text">USERS WITH LOANS</p>
-          <h4>{animatedLoans.toLocaleString()}</h4>
+          <h4><Counter end={Number(loansCount ?? 0)} /></h4>
         </div>
 
         <div className="box">
           <img src={icon3} alt="" />
           <p className="text">USERS WITH SAVINGS</p>
-          <h4>{animatedSavings.toLocaleString()}</h4>
+          <h4><Counter end={Number(savingsCount ?? 0)} /></h4>
         </div>
       </div>
 
